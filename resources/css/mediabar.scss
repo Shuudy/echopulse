@@ -1,0 +1,20 @@
+$height-mediabar: 90px;
+
+.mediabar {
+    position: fixed;
+    bottom: 0;
+
+    background-color: blue;
+
+    height: $height-mediabar;
+    //margin-left: $width-sidebar;
+
+    width: 100%;
+
+    &-content {
+        height: inherit;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
