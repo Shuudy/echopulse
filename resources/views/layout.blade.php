@@ -8,5 +8,6 @@
 </head>
 <body>
     <x-sidebar />
+    <x-mediabar />
 </body>
 </html>
