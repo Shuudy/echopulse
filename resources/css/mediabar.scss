@@ -7,14 +7,46 @@ $height-mediabar: 90px;
     background-color: blue;
 
     height: $height-mediabar;
-    //margin-left: $width-sidebar;
 
     width: 100%;
 
     &-content {
         height: inherit;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
+        padding: 0 16px;
+    }
+
+    &-progressbar-container {
+        position: absolute;
+        top: -6px;
+        height: 15px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    &-progressbar {
+        background-color: blueviolet;
+        height: 4px;
+        width: 100%;    
+    }
+
+    &-controls-center {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+    &-controls-right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+
+    &-before, &-after, &-playpause {
+        cursor: pointer;
     }
 }
