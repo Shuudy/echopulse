@@ -1,10 +1,15 @@
+$width-sidebar: 240px;
+
 .sidebar {
-    position: absolute;
+    position: fixed;
+    top: 0;
     left: 0;
     background-color: green;
+    padding-bottom: 16px;
 
-    width: 240px;
-    height: 100%;
+    width: $width-sidebar;
+    height: calc(100% - $height-mediabar);
+    overflow-y: auto;
 
     &-logo {
         display: flex;
@@ -14,8 +19,23 @@
 
     &-sep {
         margin: 0 auto;
+        margin-bottom: 16px;
         height: 1px;
         background-color: red;
         width: 70%;
+    }
+
+    &-links {
+        margin: 0 16px;
+    }
+    &-link {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        border-radius: 5px;
+        &:hover {
+            background-color: red;
+        }
+
     }
 }
