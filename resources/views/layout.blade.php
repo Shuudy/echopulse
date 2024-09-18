@@ -8,10 +8,11 @@
 </head>
 <body>
     <div class="music">
-        <div class="music-img"><img src="https://cdn.venngage.com/template/thumbnail/small/bf008bfe-9bf6-4511-b795-e86f070bfff5.webp" alt=""></div>
-        <span>Music name</span>
+        <div class="music-img"><img src="{{ asset($musique['chemin_fichier_image']) }}" alt=""></div>
+        <span>{{ $musique['titre'] }}</span>
     </div>
-    <x-sidebar />
+    <x-sidebar :musiques="$musiques"/>
     <x-mediabar />
+    
 </body>
 </html>
