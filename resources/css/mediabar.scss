@@ -10,6 +10,10 @@ $height-mediabar: 90px;
 
     width: 100%;
 
+    &:hover .mediabar-progressbar::after {
+        opacity: 1;
+    }
+
     &-hidden {
         display: none;
     }
@@ -29,11 +33,7 @@ $height-mediabar: 90px;
         width: 100%;
         display: flex;
         align-items: center;
-        cursor: pointer;
-
-        &:hover .mediabar-progressbar::after {
-            opacity: 1;
-        }
+        cursor: pointer;        
     }
 
     &-progressbar {
@@ -54,6 +54,7 @@ $height-mediabar: 90px;
             background-color: blueviolet;
             border-radius: 50%;
             opacity: 0;
+            transition: opacity .18s ease;
         }
     }
 
