@@ -7,3 +7,8 @@ Route::get('/', function () {
 });
 
 Route::view('/layout', 'layout');
+
+Route::prefix('/musique')->group(function(){
+    Route::get('/', [MusiqueController::class, "index"]);
+    Route::get('/{musique}', [MusiqueController::class, "show"])->name("musique.show");
+});
