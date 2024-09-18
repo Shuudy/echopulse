@@ -53,4 +53,7 @@ $height-mediabar: 90px;
     &-before, &-after, &-playpause {
         cursor: pointer;
     }
+    &-timecode {
+        color: #fff;
+    }
 }

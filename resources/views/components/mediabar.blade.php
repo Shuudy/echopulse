@@ -34,6 +34,11 @@
                     <path d="M13 5v14c0 .86 1.012 1.318 1.659 .753l8 -7a1 1 0 0 0 0 -1.506l-8 -7c-.647 -.565 -1.659 -.106 -1.659 .753z" stroke-width="0" fill="currentColor" />
                 </svg>
             </div>
+            <div class="mediabar-timecode">
+                <span class="mediabar-timecode-current">0:00</span>
+                <span>/</span>
+                <span class="mediabar-timecode-duration">0:00</span>
+            </div>
         </div>
 
         <div class="mediabar-controls-right">
