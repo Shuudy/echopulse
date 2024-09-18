@@ -12,7 +12,7 @@
         <span>Music name</span>
     </div>
     <audio src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/858/outfoxing.mp3" crossorigin="anonymous" ></audio>
-    <x-sidebar />
+    <x-sidebar :musiques="$musiques" />
     <x-mediabar />
 </body>
 </html>
