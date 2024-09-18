@@ -4,7 +4,17 @@
     </div>
     <div class="mediabar-content">      
 
-        <div class="mediabar-controls-left"></div>
+        <div class="mediabar-controls-left">
+            <div class="mediabar-extra">
+                <div class="mediabar-extra-img">
+                    <img src="https://cdn.venngage.com/template/thumbnail/small/bf008bfe-9bf6-4511-b795-e86f070bfff5.webp" alt="">
+                </div>
+                <div class="mediabar-extra-info">
+                    <span>Test</span>
+                    <span>Test</span>
+                </div>
+            </div>
+        </div>
 
         <div class="mediabar-controls-center">
             <div class="mediabar-before">

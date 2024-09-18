@@ -56,4 +56,32 @@ $height-mediabar: 90px;
     &-timecode {
         color: #fff;
     }
+
+    &-extra {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        &-img {
+            width: 45px;
+            height: 45px;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        &-info {
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+
+            span:nth-child(2) {
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            @media screen and (max-width: 630px) {
+                display: none;
+            }
+        }
+    }
 }
