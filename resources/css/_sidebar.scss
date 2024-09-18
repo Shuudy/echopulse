@@ -1,0 +1,57 @@
+$width-sidebar: 240px;
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: green;
+    padding-bottom: 16px;
+
+    width: $width-sidebar;
+    height: calc(100% - $height-mediabar);
+    overflow-y: auto;
+
+    &-logo {
+        display: flex;
+        justify-content: center;
+        padding: 16px;
+    }
+
+    &-sep {
+        margin: 0 auto;
+        margin-bottom: 16px;
+        height: 1px;
+        background-color: red;
+        width: 70%;
+    }
+
+    &-links {
+        margin: 0 16px;
+    }
+    &-link {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+        padding: 14px;
+        border-radius: 5px;
+        &:hover {
+            background-color: red;
+        }
+
+    }
+
+    &-music {
+        &-photo {
+            width: 40px;
+            height: 40px;
+            img {
+                width: 100%;
+            }
+        }
+        &-info {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

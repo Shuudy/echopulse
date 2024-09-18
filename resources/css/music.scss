@@ -1,0 +1,21 @@
+.music {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+
+    margin-left: $width-sidebar;
+    height: calc(100vh - $height-mediabar);
+
+    .music-img {
+        height: 200px;
+        width: 200px;
+
+        img {
+            border-radius: 50%;
+            height: 200px;
+            width: 200px;
+        }
+    }
+}
