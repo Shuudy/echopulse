@@ -20,13 +20,10 @@ window.addEventListener("load", () => {
 
     audioElement.addEventListener("timeupdate", () => {
         progressUpdate();
-        setTimes()
-        console.log("timeupdate");
+        setTimes();
     });
     
     playButton.addEventListener('click', () => {
-        console.log("Click play button")
-        // Si l'audio est en stop, alors on démarre l'audio
         if (audioCtx.state === "suspended") {
             audioCtx.resume();
         }
@@ -83,9 +80,7 @@ window.addEventListener("load", () => {
     function scrub(event) {
         const scrubTime =
         (event.offsetX / progressBarContainer.offsetWidth) * audioElement.duration;
-        console.log(audioElement.currentTime)
-        audioElement.currentTime = 20;
-        console.log(scrubTime, audioElement.currentTime)
+        audioElement.currentTime = scrubTime;
     }
     
     progressBarContainer.addEventListener("click", scrub);
