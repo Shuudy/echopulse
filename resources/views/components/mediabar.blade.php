@@ -63,7 +63,7 @@
                 <path d="M6 15h-2a1 1 0 0 1 -1 -1v-4a1 1 0 0 1 1 -1h2l3.5 -4.5a.8 .8 0 0 1 1.5 .5v14a.8 .8 0 0 1 -1.5 .5l-3.5 -4.5" />
             </svg>
 
-            <input type="range" class="volume-control" min="0" max="1" step="0.01" value="1">            
+            <input type="range" class="volume-control" min="-1" max="1" step="0.01" value="1">            
         </div>
     </div>
 </div>
