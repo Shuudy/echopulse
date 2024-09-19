@@ -4,7 +4,7 @@ $height-mediabar: 90px;
     position: fixed;
     bottom: 0;
 
-    background-color: blue;
+    background-color: rgb(33, 33, 33);
 
     height: $height-mediabar;
 
@@ -38,7 +38,7 @@ $height-mediabar: 90px;
 
     &-progressbar {
         position: relative;
-        background-color: blueviolet;
+        background-color: $main-color;
         height: 4px;
         width: 0%;    
         
@@ -51,7 +51,7 @@ $height-mediabar: 90px;
 
             width: 12px;
             height: 12px;
-            background-color: blueviolet;
+            background-color: $main-color;
             border-radius: 50%;
             opacity: 0;
             transition: opacity .18s ease;
@@ -103,5 +103,9 @@ $height-mediabar: 90px;
                 display: none;
             }
         }
+    }
+
+    input[type="range"] {
+        accent-color: $main-color;
     }
 }
