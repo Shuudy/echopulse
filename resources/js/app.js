@@ -16,6 +16,18 @@ const playerDuration = document.querySelector(".mediabar-timecode-duration");
 const pauseIcon = document.querySelector(".mediabar-playpause-pauseicon");
 
 window.addEventListener("load", () => {
+
+    // Autoplay
+    if (playButton.dataset.playing === "false") {
+        audioElement.play().then(() => {
+            playButton.dataset.playing = "true";
+            playIcon.classList.add("mediabar-hidden");
+            pauseIcon.classList.remove("mediabar-hidden");
+        }).catch(() => {
+            console.log("Autoplay bloqué par le navigateur. L'utilisateur doit interagir avec la page.");
+        });
+    }
+
     setTimes()
 
     audioElement.addEventListener("timeupdate", () => {
