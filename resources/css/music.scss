@@ -9,7 +9,10 @@
     height: calc(100vh - $height-mediabar);
 
     background-color: #000;
-
+    
+    @media screen and (max-width: $responsive-breakpoint) {
+        margin-left: 0;
+    }
     .music-img {
         height: 300px;
         width: 300px;
