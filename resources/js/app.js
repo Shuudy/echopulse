@@ -16,11 +16,65 @@ const playerDuration = document.querySelector(".mediabar-timecode-duration");
 const pauseIcon = document.querySelector(".mediabar-playpause-pauseicon");
 
 window.addEventListener("load", () => {
+
+    // Autoplay
+    if (playButton.dataset.playing === "false") {
+        audioElement.play().then(() => {
+            playButton.dataset.playing = "true";
+            playIcon.classList.add("mediabar-hidden");
+            pauseIcon.classList.remove("mediabar-hidden");
+        }).catch(() => {
+            console.log("Autoplay bloqué par le navigateur. L'utilisateur doit interagir avec la page.");
+        });
+    }
+
     setTimes()
 
     audioElement.addEventListener("timeupdate", () => {
         progressUpdate();
         setTimes();
+    });
+
+    const analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 256;
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    track.connect(analyser).connect(audioCtx.destination);
+
+    const canvas = document.querySelector(".frequency-canvas");
+    const canvasCtx = canvas.getContext("2d");
+
+    canvas.width = 600;
+    canvas.height = 300;
+
+    function draw() {
+        requestAnimationFrame(draw);
+
+        analyser.getByteFrequencyData(dataArray);
+
+        canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const barWidth = (canvas.width / bufferLength) * 1.1;
+        let barHeight;
+        let x = 0;
+
+        for (let i = 0; i < bufferLength; i++) {
+            barHeight = dataArray[i] / 2;
+
+            canvasCtx.fillStyle = 'rgba(138, 43, 226, .5)';
+            canvasCtx.fillRect(x, canvas.height - barHeight / 2, barWidth, barHeight);
+
+            x += barWidth + 1;
+        }
+    }
+
+    audioElement.addEventListener("play", () => {
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+        
+        draw();
     });
     
     playButton.addEventListener('click', () => {
@@ -85,3 +139,5 @@ window.addEventListener("load", () => {
     
     progressBarContainer.addEventListener("click", scrub);
 }, false);
+
+
