@@ -4,7 +4,7 @@
     justify-content: center;
     flex-direction: column;
     gap: 16px;
-
+    position: relative;
     margin-left: $width-sidebar;
     height: calc(100vh - $height-mediabar);
 
@@ -13,7 +13,7 @@
     .music-img {
         height: 300px;
         width: 300px;
-
+        position: relative;
         img {
             object-fit: cover;
             height: 300px;
@@ -30,5 +30,15 @@
         span:nth-child(2) {
             color: rgba(255, 255, 255, .7);
         }
+    }
+
+    .frequency-canvas {
+        position: absolute;
+        
+        bottom: 0;
+    
+        height: 300px;
+        width: 100%;
+        pointer-events: none; /* Disable canvas interaction */
     }
 }

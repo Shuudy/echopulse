@@ -8,7 +8,9 @@
 </head>
 <body>
     <div class="music">
+
         <div class="music-img"><img src="{{ asset('images/'.$musique['chemin_fichier_image']) }}" alt=""></div>
+        <canvas class="frequency-canvas"></canvas>
         <div class="music-desc">
             <span>{{ $musique['titre'] }}</span>
             <span>{{ $musique['nom_artiste'] }}</span>
