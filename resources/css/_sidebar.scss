@@ -15,6 +15,10 @@ $width-sidebar: 240px;
     height: calc(100% - $height-mediabar);
     overflow-y: auto;
 
+    @media screen and (max-width: $responsive-breakpoint) {
+        display: none;
+    }
+
     &-logo {
         display: flex;
         justify-content: center;

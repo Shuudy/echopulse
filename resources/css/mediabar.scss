@@ -88,6 +88,10 @@ $height-mediabar: 90px;
             img {
                 width: 100%;
             }
+
+            @media screen and (max-width: $responsive-breakpoint) {
+                display: none;
+            }
         }       
 
         &-info {
