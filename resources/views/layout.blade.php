@@ -11,7 +11,7 @@
         <div class="music-img"><img src="{{ asset('images/'.$musique['chemin_fichier_image']) }}" alt=""></div>
         <div class="music-desc">
             <span>{{ $musique['titre'] }}</span>
-            <span>{{ $musique['nom_artiste'] }}</span>
+            <span>{{ $musique['nom_artiste'].' • '.$musique['album'] }}</span>
         </div>
     </div>
     <audio src="{{ asset('musiques/'.$musique['chemin_fichier_audio']) }}"></audio>

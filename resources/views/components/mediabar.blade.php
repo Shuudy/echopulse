@@ -11,7 +11,7 @@
                 </div>
                 <div class="mediabar-extra-info">
                     <span>{{ $musique['titre'] }}</span>
-                    <span>{{ $musique['nom_artiste'] }}</span>
+                    <span>{{ $musique['nom_artiste'].' • '.$musique['album'] }}</span>
                 </div>
             </div>
         </div>
