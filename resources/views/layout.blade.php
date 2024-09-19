@@ -11,7 +11,7 @@
         <div class="music-img"><img src="{{ asset('images/'.$musique['chemin_fichier_image']) }}" alt=""></div>
         <span>{{ $musique['titre'] }}</span>
     </div>
-    <audio src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/858/outfoxing.mp3" crossorigin="anonymous" ></audio>
+    <audio src="{{ asset('musiques/'.$musique['chemin_fichier_audio']) }}"></audio>
     <x-sidebar :musiques="$musiques" />
     <x-mediabar :musique="$musique" />
 </body>
