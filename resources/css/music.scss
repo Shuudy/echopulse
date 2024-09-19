@@ -10,7 +10,7 @@
 
     background-color: #000;
     
-    @media screen and (max-width: 540px) {
+    @media screen and (max-width: $responsive-breakpoint) {
         margin-left: 0;
     }
     .music-img {
