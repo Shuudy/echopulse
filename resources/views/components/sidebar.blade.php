@@ -3,7 +3,7 @@
     <div class="sidebar-sep"></div>
     <div class="sidebar-links">
         @foreach($musiques as $musique)
-        <a class="sidebar-link" href="{{ route('musique.show', $musique['id']) }}">
+        <a class="sidebar-link {{ Request::is('musique/'.$musique['id']) ? 'active' : '' }}" href="{{ route('musique.show', $musique['id']) }}">
             <div class="sidebar-music-photo">
                 <img src="{{ asset('images/'.$musique['chemin_fichier_image']) }}" alt="" srcset="">
             </div>
