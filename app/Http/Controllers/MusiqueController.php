@@ -14,6 +14,10 @@ class MusiqueController extends Controller
 
     public function show(Musique $musique) {
         $musiques = Musique::all();
-        return view("layout", ['musiques' => $musiques, "musique" => $musique]);
+
+        $nextMusique = Musique::where("id", ">", $musique['id'])->first();
+        $backMusique = Musique::where("id", "<", $musique['id'])->orderBy('id','desc')->first();
+
+        return view("layout", ['musiques' => $musiques, "musique" => $musique, 'nextMusique'=> $nextMusique, 'backMusique'=> $backMusique]);
     }
 }
