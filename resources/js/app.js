@@ -111,8 +111,19 @@ window.addEventListener("load", () => {
     const gainNode = audioCtx.createGain();
     
     const volumeControl = document.querySelector(".volume-control");
+
+    const savedVolume = localStorage.getItem("savedVolume");
+    if (savedVolume !== null) {
+        volumeControl.value = savedVolume;
+        gainNode.gain.value = savedVolume;
+    } else {
+        gainNode.gain.value = volumeControl.value;
+    }
+    
     volumeControl.addEventListener("input", () => {
         gainNode.gain.value = volumeControl.value;
+
+        localStorage.setItem("savedVolume", volumeControl.value);
     });
     
     track.connect(gainNode).connect(audioCtx.destination);
