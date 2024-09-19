@@ -22,6 +22,50 @@ window.addEventListener("load", () => {
         progressUpdate();
         setTimes();
     });
+
+    const analyser = audioCtx.createAnalyser();
+analyser.fftSize = 256; // You can adjust for different visual effects
+const bufferLength = analyser.frequencyBinCount;
+const dataArray = new Uint8Array(bufferLength);
+
+track.connect(analyser).connect(audioCtx.destination);
+
+// Select canvas
+const canvas = document.querySelector(".frequency-canvas");
+const canvasCtx = canvas.getContext("2d");
+
+// Canvas dimensions
+canvas.width = 600; // Width set to 600 to match CSS
+canvas.height = 300; // Height of the album image
+
+function draw() {
+    requestAnimationFrame(draw);
+
+    analyser.getByteFrequencyData(dataArray);
+
+    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const barWidth = (canvas.width / bufferLength) * 1.1;
+    let barHeight;
+    let x = 0;
+
+    for (let i = 0; i < bufferLength; i++) {
+        barHeight = dataArray[i] / 2;
+
+        canvasCtx.fillStyle = 'rgba(138,43,226, .5)'; // You can change the color here
+        canvasCtx.fillRect(x, canvas.height - barHeight / 2, barWidth, barHeight);
+
+        x += barWidth + 1;
+    }
+}
+
+audioElement.addEventListener("play", () => {
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+    
+    draw();
+});
     
     playButton.addEventListener('click', () => {
         if (audioCtx.state === "suspended") {
@@ -85,3 +129,5 @@ window.addEventListener("load", () => {
     
     progressBarContainer.addEventListener("click", scrub);
 }, false);
+
+
