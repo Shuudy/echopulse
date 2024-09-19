@@ -16,6 +16,6 @@
     </div>
     <audio src="{{ asset('musiques/'.$musique['chemin_fichier_audio']) }}"></audio>
     <x-sidebar :musiques="$musiques" />
-    <x-mediabar :musique="$musique" />
+    <x-mediabar :musique="$musique" :nextMusique="$nextMusique" :backMusique="$backMusique" />
 </body>
 </html>
