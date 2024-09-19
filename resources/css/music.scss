@@ -9,13 +9,22 @@
     height: calc(100vh - $height-mediabar);
 
     .music-img {
-        height: 200px;
-        width: 200px;
+        height: 300px;
+        width: 300px;
 
         img {
-            border-radius: 50%;
-            height: 200px;
-            width: 200px;
+            object-fit: cover;
+            height: 300px;
+            width: 300px;
+        }
+    }
+
+    &-desc {
+        display: flex;
+        flex-direction: column;
+
+        span:nth-child(2) {
+            color: rgba(0, 0, 0, .7);
         }
     }
 }

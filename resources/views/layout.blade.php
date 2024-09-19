@@ -9,7 +9,10 @@
 <body>
     <div class="music">
         <div class="music-img"><img src="{{ asset('images/'.$musique['chemin_fichier_image']) }}" alt=""></div>
-        <span>{{ $musique['titre'] }}</span>
+        <div class="music-desc">
+            <span>{{ $musique['titre'] }}</span>
+            <span>{{ $musique['nom_artiste'] }}</span>
+        </div>
     </div>
     <audio src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/858/outfoxing.mp3" crossorigin="anonymous" ></audio>
     <x-sidebar :musiques="$musiques" />

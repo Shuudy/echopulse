@@ -21,7 +21,7 @@ $width-sidebar: 240px;
         margin: 0 auto;
         margin-bottom: 16px;
         height: 1px;
-        background-color: red;
+        background-color: #000;
         width: 70%;
     }
 
@@ -52,6 +52,10 @@ $width-sidebar: 240px;
         &-info {
             display: flex;
             flex-direction: column;
+
+            span:nth-child(2) {
+                color: rgba(0, 0, 0, 0.7);
+            }
         }
     }
 }
