@@ -7,11 +7,11 @@
         <div class="mediabar-controls-left">
             <div class="mediabar-extra">
                 <div class="mediabar-extra-img">
-                    <img src="https://cdn.venngage.com/template/thumbnail/small/bf008bfe-9bf6-4511-b795-e86f070bfff5.webp" alt="">
+                    <img src="{{ asset('images/'.$musique['chemin_fichier_image']) }}" alt="">
                 </div>
                 <div class="mediabar-extra-info">
-                    <span>Test</span>
-                    <span>Test</span>
+                    <span>{{ $musique['titre'] }}</span>
+                    <span>{{ $musique['nom_artiste'] }}</span>
                 </div>
             </div>
         </div>
