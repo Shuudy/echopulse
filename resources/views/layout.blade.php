@@ -9,7 +9,10 @@
 <body>
     <div class="music">
         <div class="music-img"><img src="https://cdn.venngage.com/template/thumbnail/small/bf008bfe-9bf6-4511-b795-e86f070bfff5.webp" alt=""></div>
-        <span>Music name</span>
+        <div class="music-desc">
+            <span>Music name</span>
+            <span>Music name</span>
+        </div>        
     </div>
     <audio src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/858/outfoxing.mp3" crossorigin="anonymous" ></audio>
     <x-sidebar />

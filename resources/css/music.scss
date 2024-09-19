@@ -18,4 +18,13 @@
             width: 200px;
         }
     }
+
+    &-desc {
+        display: flex;
+        flex-direction: column;
+
+        span:nth-child(2) {
+            color: rgba(0, 0, 0, .7);
+        }
+    }
 }
