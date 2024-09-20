@@ -15,6 +15,9 @@ const playerDuration = document.querySelector(".mediabar-timecode-duration");
 
 const pauseIcon = document.querySelector(".mediabar-playpause-pauseicon");
 
+const volumeIcon = document.querySelector(".volume-icon");
+const mutedIcon = document.querySelector(".volume-icon-mute");
+
 window.addEventListener("load", () => {
 
     // Autoplay
@@ -125,12 +128,50 @@ window.addEventListener("load", () => {
     } else {
         gainNode.gain.value = volumeControl.value;
     }
+
+    function updateVolumeIcon() {
+        if (isMuted) {
+            volumeIcon.classList.add('mediabar-hidden'); // Masquer l'icône du volume activé
+            mutedIcon.classList.remove('mediabar-hidden'); // Afficher l'icône mute
+        } else {
+            volumeIcon.classList.remove('mediabar-hidden'); // Afficher l'icône du volume activé
+            mutedIcon.classList.add('mediabar-hidden'); // Masquer l'icône mute
+        }
+    }
+
+    let isMuted = false;
+    let previousVolume = volumeControl.value;
+
+    volumeIcon.addEventListener("click", toggleMute);
+    mutedIcon.addEventListener("click", toggleMute);
+
+    function toggleMute () {
+        if (!isMuted) {
+            previousVolume = volumeControl.value;
+            volumeControl.value = -1;
+            gainNode.gain.value = -1;
+            isMuted = true;
+        } else {
+            volumeControl.value = previousVolume;
+            gainNode.gain.value = previousVolume;
+            isMuted = false;
+        }
+        updateVolumeIcon();
+    }
     
     volumeControl.addEventListener("input", () => {
         gainNode.gain.value = volumeControl.value;
 
         localStorage.setItem("savedVolume", volumeControl.value);
+
+        if (volumeControl.value > -1) {
+            isMuted = false;
+        }
+
+        updateVolumeIcon();
     });
+
+
     
     track.connect(gainNode).connect(audioCtx.destination);
     
