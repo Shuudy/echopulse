@@ -112,4 +112,8 @@ $height-mediabar: 90px;
     input[type="range"] {
         accent-color: $main-color;
     }
+
+    .volume-icon, .volume-icon-mute {
+        cursor: pointer;
+    }
 }
