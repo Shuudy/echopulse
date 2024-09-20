@@ -105,7 +105,13 @@ window.addEventListener("load", () => {
 
         progressBarFilled.style.width = "0%";
         audioElement.currentTime = 0;
-        audioElement.duration = audioElement.duration;
+
+        // Play the next music when the music is ended
+        const nextButton = document.querySelector(".mediabar-after a");
+        if (nextButton.getAttribute("href") != "") {
+            nextButton.click();
+        }
+
     });
     
     const gainNode = audioCtx.createGain();
