@@ -70,7 +70,7 @@
                 <path d="M3 3l18 18" />
             </svg>
 
-            <input type="range" class="volume-control" min="-1" max="1" step="0.01" value="1">            
+            <input type="range" class="volume-control" min="-1" max="1" step="0.01" value="0.5">            
         </div>
     </div>
 </div>
