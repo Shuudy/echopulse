@@ -20,4 +20,21 @@ class MusiqueController extends Controller
 
         return view("layout", ['musiques' => $musiques, "musique" => $musique, 'nextMusique'=> $nextMusique, 'backMusique'=> $backMusique]);
     }
+
+    public function create() {
+        return view('add_music');
+    }
+
+    public function store(Request $request) {
+
+        $request->validate([
+            'titre' => 'required|string|max:255',
+            'nom_artiste' => 'required|string|max:255',
+            'album' => 'required|string|max:255',
+            'fichier_audio' => 'required|file|mimes:mp3,wav',
+            'fichier_image' => 'required|file|mimes:jpg,jpeg,png',
+        ]);
+
+        
+    }
 }

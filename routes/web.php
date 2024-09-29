@@ -11,5 +11,8 @@ Route::view('/layout', 'layout');
 
 Route::prefix('/musique')->group(function(){
     Route::get('/', [MusiqueController::class, "index"]);
-    Route::get('/{musique}', [MusiqueController::class, "show"])->name("musique.show");
+    Route::get('/{musique}', [MusiqueController::class, "show"])->name("musique.show");    
 });
+
+Route::get('/add', [MusiqueController::class, "create"]);
+Route::post('/add', [MusiqueController::class, "store"])->name("musique.store");
