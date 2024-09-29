@@ -119,8 +119,14 @@ window.addEventListener("load", () => {
     });
     
     const savedVolume = localStorage.getItem("savedVolume");
-    volumeControl.value = savedVolume !== null ? savedVolume : volumeControl.value;
-    gainNode.gain.value = volumeControl.value;
+    const savedMuteStatus = localStorage.getItem("isMuted");
+
+    if (savedMuteStatus === "true") {
+        toggleMute();
+    } else if (savedVolume) {
+        volumeControl.value = savedVolume;
+        gainNode.gain.value = savedVolume;
+    }
 
     function updateVolumeIcon() {
         if (isMuted) {
@@ -130,20 +136,25 @@ window.addEventListener("load", () => {
             volumeIcon.classList.remove('mediabar-hidden'); // Afficher l'icône du volume activé
             mutedIcon.classList.add('mediabar-hidden'); // Masquer l'icône mute
         }
-    }    
+    }
 
     function toggleMute () {
         if (!isMuted) {
             previousVolume = volumeControl.value;
             volumeControl.value = -1;
             gainNode.gain.value = -1;
-            isMuted = true;
+            changeMuteVar(true);
         } else {
             volumeControl.value = previousVolume;
             gainNode.gain.value = previousVolume;
-            isMuted = false;
+            changeMuteVar(false);
         }
         updateVolumeIcon();
+    }
+
+    function changeMuteVar(status) {
+        isMuted = status;
+        localStorage.setItem("isMuted", status)
     }
     
     track.connect(gainNode).connect(audioCtx.destination);
@@ -176,7 +187,8 @@ window.addEventListener("load", () => {
     volumeControl.addEventListener("input", () => {
         gainNode.gain.value = volumeControl.value;
         localStorage.setItem("savedVolume", volumeControl.value);
-        if (volumeControl.value > -1) isMuted = false;
+        if (volumeControl.value > -1) changeMuteVar(false)
+        else if (volumeControl.value == -1) changeMuteVar(true)
         updateVolumeIcon();
     });
 
