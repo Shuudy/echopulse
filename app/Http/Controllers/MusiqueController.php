@@ -13,10 +13,10 @@ class MusiqueController extends Controller
     }
 
     public function show(Musique $musique) {
-        $musiques = Musique::all();
+        $musiques = Musique::select('id', 'titre', 'nom_artiste', 'album', 'chemin_fichier_audio', 'chemin_fichier_image')->get();       
 
-        $nextMusique = Musique::where("id", ">", $musique['id'])->first();
-        $backMusique = Musique::where("id", "<", $musique['id'])->orderBy('id','desc')->first();
+        $nextMusique = $musiques->where('id', '>', $musique->id)->first() ?? $musiques->first();
+        $backMusique = $musiques->where('id', '<', $musique->id)->last() ?? Musique::orderBy('id', 'desc')->first();
 
         return view("layout", ['musiques' => $musiques, "musique" => $musique, 'nextMusique'=> $nextMusique, 'backMusique'=> $backMusique]);
     }

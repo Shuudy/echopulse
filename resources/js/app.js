@@ -9,14 +9,18 @@ const progressBarFilled = document.querySelector(".mediabar-progressbar");
 
 const playButton = document.querySelector(".mediabar-playpause-playbutton");
 const playIcon = document.querySelector(".mediabar-playpause-playicon");
+const pauseIcon = document.querySelector(".mediabar-playpause-pauseicon");
 
 const playerCurrentTime = document.querySelector(".mediabar-timecode-current");
 const playerDuration = document.querySelector(".mediabar-timecode-duration");
 
-const pauseIcon = document.querySelector(".mediabar-playpause-pauseicon");
-
 const volumeIcon = document.querySelector(".volume-icon");
 const mutedIcon = document.querySelector(".volume-icon-mute");
+const volumeControl = document.querySelector(".volume-control");
+
+let isMuted = false;
+let previousVolume = volumeControl.value;
+const gainNode = audioCtx.createGain();
 
 window.addEventListener("load", () => {
 
@@ -73,14 +77,12 @@ window.addEventListener("load", () => {
     }
 
     audioElement.addEventListener("play", () => {
-        if (audioCtx.state === 'suspended') {
-            audioCtx.resume();
-        }
+        if (audioCtx.state === 'suspended') audioCtx.resume();
         
         draw();
     });
-    
-    playButton.addEventListener('click', () => {
+
+    function togglePlayPause() {
         if (audioCtx.state === "suspended") {
             audioCtx.resume();
         }
@@ -98,7 +100,7 @@ window.addEventListener("load", () => {
             pauseIcon.classList.add("mediabar-hidden");
             playIcon.classList.remove("mediabar-hidden");
         }
-    });
+    }
 
     audioElement.addEventListener("ended", () => {
         playButton.dataset.playing = "false";
@@ -114,19 +116,16 @@ window.addEventListener("load", () => {
         if (nextButton.getAttribute("href") != "") {
             nextButton.click();
         }
-
     });
     
-    const gainNode = audioCtx.createGain();
-    
-    const volumeControl = document.querySelector(".volume-control");
-
     const savedVolume = localStorage.getItem("savedVolume");
-    if (savedVolume !== null) {
+    const savedMuteStatus = localStorage.getItem("isMuted");
+
+    if (savedMuteStatus === "true") {
+        toggleMute();
+    } else if (savedVolume) {
         volumeControl.value = savedVolume;
         gainNode.gain.value = savedVolume;
-    } else {
-        gainNode.gain.value = volumeControl.value;
     }
 
     function updateVolumeIcon() {
@@ -139,50 +138,37 @@ window.addEventListener("load", () => {
         }
     }
 
-    let isMuted = false;
-    let previousVolume = volumeControl.value;
-
-    volumeIcon.addEventListener("click", toggleMute);
-    mutedIcon.addEventListener("click", toggleMute);
-
     function toggleMute () {
         if (!isMuted) {
             previousVolume = volumeControl.value;
             volumeControl.value = -1;
             gainNode.gain.value = -1;
-            isMuted = true;
+            changeMuteVar(true);
         } else {
             volumeControl.value = previousVolume;
             gainNode.gain.value = previousVolume;
-            isMuted = false;
+            changeMuteVar(false);
         }
         updateVolumeIcon();
     }
-    
-    volumeControl.addEventListener("input", () => {
-        gainNode.gain.value = volumeControl.value;
 
-        localStorage.setItem("savedVolume", volumeControl.value);
-
-        if (volumeControl.value > -1) {
-            isMuted = false;
-        }
-
-        updateVolumeIcon();
-    });
-
-
+    function changeMuteVar(status) {
+        isMuted = status;
+        localStorage.setItem("isMuted", status)
+    }
     
     track.connect(gainNode).connect(audioCtx.destination);
-    
+
     function setTimes() {
-        playerCurrentTime.textContent = new Date(audioElement.currentTime * 1000)
-          .toISOString()
-          .substr(14, 5)
-        playerDuration.textContent = new Date(audioElement.duration * 1000)
-          .toISOString()
-          .substr(14, 5)
-      }
+        const formatTime = (time) => {
+            const minutes = Math.floor(time / 60).toString().padStart(2, '0');
+            const seconds = Math.floor(time % 60).toString().padStart(2, '0');
+            return `${minutes}:${seconds}`;
+        };
+
+        playerCurrentTime.textContent = formatTime(audioElement.currentTime);
+        playerDuration.textContent = formatTime(audioElement.duration);
+    }
 
     function progressUpdate() {
         const percent = (audioElement.currentTime / audioElement.duration) * 100;
@@ -190,12 +176,30 @@ window.addEventListener("load", () => {
     }
     
     function scrub(event) {
-        const scrubTime =
-        (event.offsetX / progressBarContainer.offsetWidth) * audioElement.duration;
+        const scrubTime = (event.offsetX / progressBarContainer.offsetWidth) * audioElement.duration;
         audioElement.currentTime = scrubTime;
     }
     
+    // Events
+    playButton.addEventListener('click', togglePlayPause);
     progressBarContainer.addEventListener("click", scrub);
+
+    volumeControl.addEventListener("input", () => {
+        gainNode.gain.value = volumeControl.value;
+        localStorage.setItem("savedVolume", volumeControl.value);
+        if (volumeControl.value > -1) changeMuteVar(false)
+        else if (volumeControl.value == -1) changeMuteVar(true)
+        updateVolumeIcon();
+    });
+
+    volumeIcon.addEventListener("click", toggleMute);
+    mutedIcon.addEventListener("click", toggleMute);
+
+    document.addEventListener("keyup", (e) => {
+        if (e.key == " " || e.code == "Space") {
+            togglePlayPause();
+        }
+    })
 }, false);
 
 

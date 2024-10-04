@@ -81,6 +81,7 @@ $height-mediabar: 90px;
         display: flex;
         align-items: center;
         gap: 16px;
+        max-width: 600px;
         &-img {
             width: 45px;
             height: 45px;

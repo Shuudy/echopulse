@@ -8,8 +8,8 @@
                 <img src="{{ asset('images/'.$musique['chemin_fichier_image']) }}" alt="" srcset="">
             </div>
             <div class="sidebar-music-info">
-                <span>{{ $musique['titre'] }}</span>
-                <span>{{ $musique['nom_artiste'] }}</span>
+                <span>{{ Str::limit($musique['titre'], 20) }}</span>
+                <span>{{ Str::limit($musique['nom_artiste'], 20) }}</span>
             </div>
         </a>
         @endforeach
